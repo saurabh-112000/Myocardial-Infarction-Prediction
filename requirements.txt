@@ -11,5 +11,4 @@ dataclasses
 datetime
 dill
 pathlib
-catboost
 
