@@ -7,3 +7,9 @@ scikit-learn
 missingno
 statsmodels
 xgboost
+dataclasses
+datetime
+dill
+pathlib
+catboost
+
