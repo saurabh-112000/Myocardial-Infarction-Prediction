@@ -1,0 +1,358 @@
+<head>
+    <style>
+        body {
+            font-family: 'Palatino', sans-serif;
+            font-weight: 100;
+        }
+        h1, h2 {
+            text-align: center;
+            margin: 10 auto;
+            width: 100%;
+        }
+        input[type="number"], .form-control, select {
+            font-family: 'Palatino', sans-serif;
+            font-weight: 100;
+            text-align: center;
+            padding: 2px 0;
+            margin-bottom: 0.3rem;
+            width: 10%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="MCI_complication">
+       <h1>Prediction of Myocardial Infarction Complications</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h2>
+            <legend>Enter data below for prediction - submit and scroll down to see prediction</legend>
+        </h2>
+
+        <!-- Gender -->
+        <div class="mb-3">
+            <label class="form-label">1. Gender</label>
+            <select class="form-control" name="SEX" required>
+                <option selected disabled value="">Select Gender</option>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select>
+        </div>
+
+        <!-- Chronic Heart Failure (HF) -->
+        <div class="mb-3">
+            <label class="form-label">2. Previous History of Heart Failure</label>
+            <select class="form-control" name="ZSN_A" required>
+                <option selected disabled value="">Select Severity</option>
+                <option value="0">No previous history</option>
+                <option value="1">Stage I</option>
+                <option value="2">Stage IIÐ ( Heart failure due to right ventricular systolic dysfunction )</option>
+                <option value="3">Stage IIÐ ( Heart failure due to right ventricular systolic dysfunction )</option>
+                <option value="4">Stage IIB ( LV & RV Dysfunction )</option>
+            </select>
+        </div>
+
+        <!-- White Blood Cell Count -->
+        <div class="mb-3">
+            <label class="form-label">3. White Blood Cell Count ( Billions per L ) - Ideal: 4.0 to 11.0</label</label>
+            <input class="form-control" type="number" name="L_BLOOD" placeholder="2 to 27.9" min="2" max="27.9" step="0.1" required />
+        </div>
+
+        <!-- Age -->
+        <div class="mb-3">
+            <label class="form-label">4. Age</label>
+            <input class="form-control" type="number" name="AGE" placeholder="1 to 105" min="1" max="105" required />
+        </div>
+
+        <!-- Erythrocyte Sedimentation Rate (ESR) -->
+        <div class="mb-3">
+            <label class="form-label">5. Erythrocyte Sedimentation Rate ( mm per hour ) - Normal: less than 20 for men, less than 30 for women</label>
+            <input class="form-control" type="number" name="ROE" placeholder="1 to 140" min="1" max="140" required />
+        </div>
+
+        <!-- Serum Potassium Content -->
+        <div class="mb-3">
+            <label class="form-label">6. Serum Potassium Content ( mmol per L )  - Ideal: 3.5 to 5.0</label>
+            <input class="form-control" type="number" name="K_BLOOD" placeholder="0 to 8.2" min="0" max="8.2" step="0.1" required />
+        </div>
+
+        <!-- Serum Aspartate Aminotransferase Content -->
+        <div class="mb-3">
+            <label class="form-label">7. Serum Aspartate Aminotransferase ( IU per L ) - Normal: 0 to 40 </label>
+            <input class="form-control" type="number" name="AST_BLOOD" placeholder="0 to 40" min="0" max="40" step="0.5" required />
+        </div>
+
+        <!-- Serum Sodium Content -->
+        <div class="mb-3">
+            <label class="form-label">8. Serum Sodium Content ( mmol per L ) - Ideal: 135 to 145</label>
+            <input class="form-control" type="number" name="NA_BLOOD" placeholder="5 to 250" min="5" max="250" step="1" required />
+        </div>
+
+        <!-- Serum Alanine Aminotransferase Content -->
+        <div class="mb-3">
+            <label class="form-label">9. Serum Alanine Aminotransferase ( IU per L )- Normal: 7 to 56</label>
+            <input class="form-control" type="number" name="ALT_BLOOD" placeholder="0.03 to 3" min="0.03" max="3" step="0.01" required />
+        </div>
+
+        <!-- Systolic Blood Pressure in ICU -->
+        <div class="mb-3">
+            <label class="form-label">10. Systolic Blood Pressure in ICU ( mmHg )</label>
+            <input class="form-control" type="number" name="S_AD_ORIT" placeholder="1 to 260" min="1" max="260" required />
+        </div>
+
+        <!-- Diastolic Blood Pressure in ICU -->
+        <div class="mb-3">
+            <label class="form-label">11. Diastolic Blood Pressure in ICU ( mmHg )</label>
+            <input class="form-control" type="number" name="D_AD_ORIT" placeholder="1 to 190" min="1" max="190" required />
+        </div>
+
+        <!-- Time from CHD Attack to Hospital -->
+        <div class="mb-3">
+            <label class="form-label">12. Time elapsed from the beginning of the attack to the hospital</label>
+            <select class="form-control" name="TIME_B_S" required>
+                <option selected disabled value="">Select Time Range</option>
+                <option value="1">Less than 2 hours</option>
+                <option value="2">2 to 4 hours</option>
+                <option value="3">4 to 6 hours</option>
+                <option value="4">6 to 8 hours</option>
+                <option value="5">8 to 12 hours</option>
+                <option value="6">More than 1 day</option>
+                <option value="7">More than 2 days</option>
+                <option value="8">More than 3 days</option>
+            </select>
+        </div>
+
+        <!-- Presence of Lateral Myocardial Infarction -->
+        <div class="mb-3">
+            <label class="form-label">13. Presence of a lateral myocardial infarction (left ventricular) (ECG changes in leads V5: V6 , I, AVL)</label>
+            <select class="form-control" name="lat_im" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="0">There is no infarct in this location</option>
+                <option value="1">QRS has no changes</option>
+                <option value="2">QRS is like QR-complex</option>
+                <option value="3">QRS is like Qr-complex</option>
+                <option value="4">QRS is like QS-complex</option>
+            </select>
+        </div>
+
+        <!-- Exertional Angina Pectoris in Anamnesis -->
+        <div class="mb-3">
+            <label class="form-label">14. History of Exertional Angina Pectoris </label>
+            <select class="form-control" name="STENOK_AN" required>
+                <option selected disabled value="">Select History</option>
+                <option value="0">Never Experienced</option>
+                <option value="1">during the last year</option>
+                <option value="2">one year ago</option>
+                <option value="3">two years ago</option>
+                <option value="4">three years ago</option>
+                <option value="5">4-5 years ago</option>
+                <option value="6">more than 5 years ago</option>
+            </select>
+        </div>
+
+        <!-- Duration of Arterial Hypertension -->
+        <div class="mb-3">
+            <label class="form-label">15. Duration of Arterial Hypertension</label>
+            <select class="form-control" name="DLIT_AG" required>
+                <option selected disabled value="">Select Duration</option>
+                <option value="0">No Hypertension</option>
+                <option value="1">one years</option>
+                <option value="2">two yearss</option>
+                <option value="3">three years</option>
+                <option value="4">four years</option>
+                <option value="5">five years</option>
+                <option value="6">six to ten years</option>
+                <option value="7">more than 10 year</option>
+            </select>
+        </div>
+
+        <!-- Anterior Myocardial Infarction -->
+        <div class="mb-3">
+            <label class="form-label">16. Presence of an anterior myocardial infarction (left ventricular) (ECG changes in leads V1: V4 )</label>
+            <select class="form-control" name="ant_im" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="0">There is no infarct in this location</option>
+                <option value="1">QRS has no changes</option>
+                <option value="2">QRS is like QR-complex</option>
+                <option value="3">QRS is like Qr-complex</option>
+                <option value="4">QRS is like QS-complex</option>
+            </select>
+        </div>
+
+        <!-- Inferior Myocardial Infarction -->
+        <div class="mb-3">
+            <label class="form-label">17. Presence of an inferior myocardial infarction (left ventricular) (ECG changes in leads III, AVF, II)</label>
+            <select class="form-control" name="inf_im" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="0">There is no infarct in this location</option>
+                <option value="1">QRS has no changes</option>
+                <option value="2">QRS is like QR-complex</option>
+                <option value="3">QRS is like Qr-complex</option>
+                <option value="4">QRS is like QS-complex</option>
+            </select>
+        </div>
+
+        <!-- Quantity of Myocardial Infarctions in Anamnesis -->
+        <div class="mb-3">
+            <label class="form-label">18. Quantity of myocardial infarctions in the anamnesis ( in past )</label>
+            <select class="form-control" name="INF_ANAM" required>
+                <option selected disabled value="">Select Quantity</option>
+                <option value="0">None</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three or More</option>
+            </select>
+        </div>
+
+        <!-- Coronary Heart Disease in Recent Weeks -->
+        <div class="mb-3">
+            <label class="form-label">19. Coronary heart complication (CHD) in recent weeks, days before admission to hospital</label>
+            <select class="form-control" name="IBS_POST" required>
+                <option selected disabled value="">Select Condition</option>
+                <option value="0">No CHD</option>
+                <option value="1">Exertional Angina Pectoris</option>
+                <option value="2">Unstable Angina Pectoris</option>
+            </select>
+        </div>
+
+        <!-- Presence of Essential Hypertension -->
+        <div class="mb-3">
+            <label class="form-label">20. Presence of Essential Hypertension</label>
+            <select class="form-control" name="GB" required>
+                <option selected disabled value="">Select Stage</option>
+                <option value="0">No Hypertension</option>
+                <option value="1">Stage 1</option>
+                <option value="2">Stage 2</option>
+                <option value="3">Stage 3</option>
+            </select>
+        </div>
+
+        <!-- Use of Opioid Drugs in ICU First Hours -->
+        <div class="mb-3">
+            <label class="form-label">21. Use of opioid drugs in the ICU in the first hours of the hospital period</label>
+            <select class="form-control" name="NA_R_1_n" required>
+                <option selected disabled value="">Select Usage</option>
+                <option value="0">Not administered</option>
+                <option value="1">One time</option>
+                <option value="2">two times</option>
+                <option value="3">three times</option>
+                <option value="4">Four times</option>
+            </select>
+        </div>
+
+        <!-- Use of NSAIDs in ICU First Hours -->
+        <div class="mb-3">
+            <label class="form-label">22. Use of NSAIDs in the ICU in the first hours of the hospital period</label>
+            <select class="form-control" name="NOT_NA_1_n" required>
+                <option selected disabled value="">Select Usage</option>
+                <option value="0">Not administered</option>
+                <option value="1">One time</option>
+                <option value="2">two times</option>
+                <option value="3">three times</option>
+                <option value="4">Four or more times</option>
+            </select>
+        </div>
+
+        <!-- Chronic Bronchitis -->
+        <div class="mb-3">
+            <label class="form-label">23. Chronic bronchitis in the anamnesis ( in past )</label>
+            <select class="form-control" name="zab_leg_01" required>
+                <option selected disabled value="">Select Condition</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <!-- Functional Class of Angina Pectoris -->
+        <div class="mb-3">
+            <label class="form-label">24. Functional class (FC) of angina pectoris in the last year</label>
+            <select class="form-control" name="FK_STENOK" required>
+                <option selected disabled value="">Select Class</option>
+                <option value="0">No Angina Pectoris</option>
+                <option value="1">I FC</option>
+                <option value="2">II FC</option>
+                <option value="3">III FC</option>
+                <option value="4">IV FC</option>
+            </select>
+        </div>
+
+        <!-- Relapse of Pain in First Hours -->
+        <div class="mb-3">
+            <label class="form-label">25. Relapse of the pain in the first hours of the hospital period</label>
+            <select class="form-control" name="R_AB_1_n" required>
+                <option selected disabled value="">Select Frequency</option>
+                <option value="0">No Relapse</option>
+                <option value="1">one time</option>
+                <option value="2">two times</option>
+                <option value="3">3 or more times</option>
+                
+            </select>
+        </div>
+
+        <!-- Use of Opioid Drugs in ICU Second Day -->
+        <div class="mb-3">
+            <label class="form-label">26. Use of opioid drugs in the ICU in the second day of the hospital period</label>
+            <select class="form-control" name="NA_R_2_n" required>
+                <option selected disabled value="">Select Usage</option>
+                <option value="0">Not administered</option>
+                <option value="1">One time</option>
+                <option value="2">two times</option>
+                <option value="3">three times</option>
+            </select>
+        </div>
+
+        <!-- Use of Lidocaine by Emergency Cardiology Team -->
+        <div class="mb-3">
+            <label class="form-label">27. Use of lidocaine in the ICU </label>
+            <select class="form-control" name="LID_S_n" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <!-- Presence of Diabetes Mellitus -->
+        <div class="mb-3">
+            <label class="form-label">28. Diabetes mellitus in the anamnesis ( in past )</label>
+            <select class="form-control" name="endocr_01" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </div>
+
+        <!-- Use of Opioid Drugs by Emergency Cardiology Team -->
+        <div class="mb-3">
+            <label class="form-label">29. Use of opioid drugs by the Emergency Cardiology Team</label>
+            <select class="form-control" name="NA_KB" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <!-- Use of Trental in ICU -->
+        <div class="mb-3">
+            <label class="form-label">30. Use of Trental in the ICU</label>
+            <select class="form-control" name="TRENT_S_n" required>
+                <option selected disabled value="">Select Status</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Submit Patient Data" />
+        </div>
+    </form>
+    <h2>
+        {% if results == 0 %}
+            Prediction -> {{results}} ...With the readings that you just entered, Chronic Heart Failure is not expected. Click back on your browser to modify readings or enter new ones on this page.
+        {% elif results == 1 %}
+            Prediction -> {{results}} ...With the readings that you just entered, Chronic Heart Failure is expected. Click back on your browser to modify readings or enter new ones on this page.
+        {% else %}
+            Prediction Unknown - Submit to predict
+        {% endif %}
+    </h2>
+   </body>
+</html>
