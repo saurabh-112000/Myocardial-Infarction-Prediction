@@ -8,6 +8,8 @@ The progression of MI varies among patients, manifesting either as uncomplicated
 
 Predicting these complications poses a challenge, even for seasoned professionals, making the proactive identification and prevention of such complications a crucial aspect of MI management. 
 
+In this project, I have trained various ensemble classifiers on the data to predict Chronic Heart Failure based on multiple clinical parameters. The project consists of an end-to-end pipeline structure, starting from exploratory data analysis, data ingestion, data transformation, model training, and finally deployment. 
+
 ## Authors
 
 - [Github - @saurabh-112000](https://github.com/saurabh-112000)
