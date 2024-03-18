@@ -36,6 +36,40 @@ Dataset from UC Irvine Machine Learning Repository is used - [Link](https://arch
 
 ➼ **Features** # - 111, **Instances** # - 1700
 
+# Project Structure
+
+    ├── .github/
+    │   └── workflows/
+    │       └── main.yaml
+    ├── artifacts/
+    │   ├── data.csv
+    │   ├── train.csv
+    │   ├── test.csv
+    │   ├── model.pkl
+    │   └── preprocessor.pkl
+    ├── notebook/
+    │   ├── data/
+    │   │   └── MI_complication_dataset.csv
+    │   └── EDA.ipynb
+    ├── src/
+    │   ├── components/
+    │   │   ├── data_ingestion.py
+    │   │   ├── data_transformation.py
+    │   │   └── model_trainer.py
+    │   ├── pipeline/
+    │   │   └── predict_pipeline.py
+    │   ├── templates/
+    │   │   ├── index.html
+    │   │   └── home.html
+    │   ├── exception.py
+    │   ├── logger.py
+    │   └── utils.py
+    ├── app.py
+    ├── Dockerfile
+    ├── readme.MD
+    ├── requirements.txt
+    └── setup.py
+
 
 ## Deployment Workflow with Docker, GitHub Actions, and Heroku
 
