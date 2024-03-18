@@ -36,7 +36,7 @@ Dataset from UC Irvine Machine Learning Repository is used - [Link](https://arch
 
 ➼ **Features** # - 111, **Instances** # - 1700
 
-# Project Structure
+## Project Structure
 
     ├── .github/
     │   └── workflows/
