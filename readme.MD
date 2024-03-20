@@ -18,7 +18,7 @@ In this project, I have trained various ensemble classifiers on the data to pred
 
 ## Application
 
-➼ [Home Page](https://mi-complicationpred-saurabh-d6d0de207765.herokuapp.com/)
+➼ [Home Page](https://mi-complicationpred-saurabh-d6d0de207765.herokuapp.com/) - Please note application takes 30 seconds to wake up since it's deployed on an eco server.
 
 ➼ [Prediction Page](https://mi-complicationpred-saurabh-d6d0de207765.herokuapp.com/predictdata)
 
